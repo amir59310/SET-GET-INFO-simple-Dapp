@@ -1,4 +1,4 @@
-function background({ GetInfo, AddressValue, BalanceValue, SetValue, setValueInput, GetValue, SetValueBtn, GetBtn }) {
+function background({ GetInfo, AddressValue, BalanceValue, SetBtn, setValueInput, GetValue, SetValueBtn, GetBtn , SetNoticfClick }) {
     return (
         <div className="bg-[#252525] bg-cover min-h-screen flex items-center  justify-center">
 
@@ -11,8 +11,8 @@ function background({ GetInfo, AddressValue, BalanceValue, SetValue, setValueInp
                         <label className="text-[#5c5c5c] font-mono font-extrabold ml-1  ">SetValue | <span className="text-sm">Please input number</span></label>
                     </div >
                     <div className="flex items-center justify-center mt-1 gap-6">
-                        <input value={SetValue} onChange={(e) => setValueInput(e.target.value)} className="border-0 focus:ring-0 rounded-lg bg-[#3f3f3f] dark:text-white p-2 focus:bg-[#303030] " type="number" />
-                        <button onClick={SetValueBtn} className="bg-[#3f3f3f] px-4 py-2 font-bold rounded-xl text-[#1e1e1e] hover:bg-[#5c5c5c]">SET</button>
+                        <input value={SetBtn} onChange={(e) => setValueInput(e.target.value)} className="border-0 focus:ring-0 rounded-lg bg-[#3f3f3f] dark:text-white p-2 focus:bg-[#303030] " type="number" />
+                        <button onClick={SetValueBtn }  className="bg-[#3f3f3f] px-4 py-2 font-bold rounded-xl text-[#1e1e1e] hover:bg-[#5c5c5c]">SET</button>
                     </div>
                 </div>
 
