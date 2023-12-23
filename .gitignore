@@ -4,7 +4,10 @@
 /node_modules
 /.pnp
 .pnp.js
-
+/artifacts
+/cache
+/contracts/dappContract.sol
+.env
 # testing
 /coverage
 
