@@ -11,6 +11,9 @@ const App = () => {
   const [result, setResult] = useState("");
   const [balanceaccount, setbalanceaccount] = useState("Balance");
   const [addresAcc, setddresAcc] = useState("Address");
+
+
+  //Toast notification
   const ClickSet = () =>
     toast.info("Please wait For Confirmation...", {
       position: "top-left",
@@ -94,7 +97,7 @@ const App = () => {
       theme: "dark",
     });
 
-
+    // Initialize contract and connect to Metamask
   useEffect(() => {
     const init = async () => {
       try {
@@ -119,6 +122,9 @@ const App = () => {
     init();
   }, []);
 
+  // Set value to contract
+  //Set Input function SetValue
+
   const handleSetValue = async () => {
     try {
       const transaction = await contract.setValue(valueInput);
@@ -134,6 +140,9 @@ const App = () => {
     }
   };
 
+  // Get value from contract
+  // Call function SetValue For Show Result
+
   const handleGetValue = async () => {
     try {
       const result = await contract.value();
@@ -145,6 +154,9 @@ const App = () => {
       ResultFalseGet();
     }
   };
+
+  // Get account info
+
   const getAccountInfo = async () => {
     try {
       // ایجاد یک شیء از کلاس Signer با استفاده از اطلاعات مربوط به اتصال به متامسک
