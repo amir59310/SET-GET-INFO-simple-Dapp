@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import { ethers } from "ethers";
 import ABI from "./abiFile/ABI.json";
 import Background from "./Components/Background";
-import Alert from "./Components/Alert";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
@@ -48,7 +47,7 @@ const App = () => {
       theme: "dark",
     });
 
-    const ResultTrueGet = () =>
+  const ResultTrueGet = () =>
     toast.success("Get value success !", {
       position: "top-left",
       autoClose: 3000,
@@ -60,7 +59,7 @@ const App = () => {
       theme: "dark",
     });
 
-    const ResultFalseGet = () =>
+  const ResultFalseGet = () =>
     toast.error("Get value Failed", {
       position: "top-left",
       autoClose: 3000,
@@ -72,7 +71,7 @@ const App = () => {
       theme: "dark",
     });
 
-    const UpdateTrueGetInfo = () =>
+  const UpdateTrueGetInfo = () =>
     toast.info(" Update success 😉", {
       position: "top-left",
       autoClose: 3000,
@@ -83,7 +82,7 @@ const App = () => {
       progress: undefined,
       theme: "dark",
     });
-    const UpdateFalseGetInfo = () =>
+  const UpdateFalseGetInfo = () =>
     toast.error("Update Failed 😢", {
       position: "top-left",
       autoClose: 3000,
@@ -170,7 +169,7 @@ const App = () => {
       console.error("Error getting account balance:", error);
       UpdateFalseGetInfo();
     }
-    
+
   };
 
   return (
