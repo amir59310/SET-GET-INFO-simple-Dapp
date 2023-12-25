@@ -5,7 +5,7 @@ import Background from "./Components/Background";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 // import toast from module file toastNotification
-import{ClickSet , ResultFalseGet, ResultFalseSet, ResultTrueGet, PleaseSetNumber, UpdateTrueGetInfo, UpdateFalseGetInfo , ResultTrueSet} from "./module/toastNotification"
+import { ClickSet, WalletNotConnected, ResultFalseGet, ResultFalseSet, ResultTrueGet, PleaseSetNumber, UpdateTrueGetInfo, UpdateFalseGetInfo, ResultTrueSet } from "./module/toastNotification"
 
 
 
@@ -16,16 +16,19 @@ const App = () => {
   const [balanceaccount, setbalanceaccount] = useState("Balance");
   const [addresAcc, setddresAcc] = useState("Address");
 
- 
   // Initialize contract and connect to Metamask
-  
+
+
   useEffect(() => {
     const init = async () => {
       try {
         // Connect to Metamask
         const provider = new ethers.providers.Web3Provider(window.ethereum);
-        await window.ethereum.request({ method: "eth_requestAccounts" });
+        const accounts = await window.ethereum.request({ method: "eth_requestAccounts" });
+
         const signer = provider.getSigner();
+
+
 
         // Contract address and ABI
         const contractAddress = "0x44e2bF91efE9043de6919650C3292C4D59cD1326";
@@ -35,13 +38,24 @@ const App = () => {
         const contract = new ethers.Contract(contractAddress, abi, signer);
 
         setContract(contract);
+
       } catch (error) {
         console.error("Error initializing:", error);
+
+        // Toast Check error message for user rejection
+        if (error.message.includes("User rejected the request")) {
+          WalletNotConnected();
+        }
       }
     };
 
+
+
     init();
   }, []);
+
+
+
 
   // Set value to contract
   //Set Input function SetValue
@@ -133,7 +147,7 @@ const App = () => {
 
       <Background
         //props from Background
-        
+
         GetInfo={getAccountInfo}
         AddressValue={addresAcc}
         BalanceValue={balanceaccount}

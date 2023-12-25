@@ -99,3 +99,27 @@ export const PleaseSetNumber = () =>
         progress: undefined,
         theme: "dark",
     });
+
+// export const WalletConnected = () =>
+//     toast.success("Wallet Connected", {
+//         position: "top-left",
+//         autoClose: 3000,
+//         hideProgressBar: false,
+//         closeOnClick: true,
+//         pauseOnHover: true,
+//         draggable: true,
+//         progress: undefined,
+//         theme: "dark",
+//     });
+
+export const WalletNotConnected = () =>
+    toast.error("Wallet Not Connected", {
+        position: "top-left",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+    });
