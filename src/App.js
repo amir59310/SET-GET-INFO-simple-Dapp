@@ -4,100 +4,21 @@ import ABI from "./abiFile/ABI.json";
 import Background from "./Components/Background";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+// import toast from module file toastNotification
+import{ClickSet , ResultFalseGet, ResultFalseSet, ResultTrueGet, PleaseSetNumber, UpdateTrueGetInfo, UpdateFalseGetInfo , ResultTrueSet} from "./module/toastNotification"
+
+
 
 const App = () => {
   const [contract, setContract] = useState(null);
-  const [valueInput, setValueInput] = useState("");
+  const [valueInput, setValueInput] = useState(0);
   const [result, setResult] = useState("");
   const [balanceaccount, setbalanceaccount] = useState("Balance");
   const [addresAcc, setddresAcc] = useState("Address");
 
-
-  //Toast notification
-  const ClickSet = () =>
-    toast.info("Please wait For Confirmation...", {
-      position: "top-left",
-      autoClose: 2000,
-      hideProgressBar: false,
-      closeOnClick: true,
-      pauseOnHover: true,
-      draggable: true,
-      progress: undefined,
-      theme: "dark",
-    });
-
-  const ResultTrueSet = () =>
-    toast.success("Confirmation success !", {
-      position: "top-left",
-      autoClose: 3000,
-      hideProgressBar: false,
-      closeOnClick: true,
-      pauseOnHover: true,
-      draggable: true,
-      progress: undefined,
-      theme: "dark",
-    });
-
-  const ResultFalseSet = () =>
-    toast.error("Confirmation Failed", {
-      position: "top-left",
-      autoClose: 3000,
-      hideProgressBar: false,
-      closeOnClick: true,
-      pauseOnHover: true,
-      draggable: true,
-      progress: undefined,
-      theme: "dark",
-    });
-
-  const ResultTrueGet = () =>
-    toast.success("Get value success !", {
-      position: "top-left",
-      autoClose: 3000,
-      hideProgressBar: false,
-      closeOnClick: true,
-      pauseOnHover: true,
-      draggable: true,
-      progress: undefined,
-      theme: "dark",
-    });
-
-  const ResultFalseGet = () =>
-    toast.error("Get value Failed", {
-      position: "top-left",
-      autoClose: 3000,
-      hideProgressBar: false,
-      closeOnClick: true,
-      pauseOnHover: true,
-      draggable: true,
-      progress: undefined,
-      theme: "dark",
-    });
-
-  const UpdateTrueGetInfo = () =>
-    toast.info(" Update success 😉", {
-      position: "top-left",
-      autoClose: 3000,
-      hideProgressBar: false,
-      closeOnClick: true,
-      pauseOnHover: true,
-      draggable: true,
-      progress: undefined,
-      theme: "dark",
-    });
-  const UpdateFalseGetInfo = () =>
-    toast.error("Update Failed 😢", {
-      position: "top-left",
-      autoClose: 3000,
-      hideProgressBar: false,
-      closeOnClick: true,
-      pauseOnHover: true,
-      draggable: true,
-      progress: undefined,
-      theme: "dark",
-    });
-
-    // Initialize contract and connect to Metamask
+ 
+  // Initialize contract and connect to Metamask
+  
   useEffect(() => {
     const init = async () => {
       try {
@@ -126,9 +47,16 @@ const App = () => {
   //Set Input function SetValue
 
   const handleSetValue = async () => {
+
+    // Checked valueInput is a number
+    const intValueInput = parseInt(valueInput);
+
     try {
-      const transaction = await contract.setValue(valueInput);
-      ClickSet();
+
+      const transaction = await contract.setValue(intValueInput);
+
+      ClickSet(); //Show Click Set Toast
+
       await transaction.wait();
 
       console.log("Value set successfully");
@@ -136,7 +64,15 @@ const App = () => {
       ResultTrueSet();
     } catch (error) {
       console.error("Error setting value:", error);
-      ResultFalseSet();
+      // Check error message for user rejection
+      if (error.message.includes("user rejected transaction")) {
+        ResultFalseSet();
+      }
+      // Check error message for invalid Set Number
+      else if (error.message.includes("invalid BigNumber")) {
+        PleaseSetNumber();
+      }
+
     }
   };
 
@@ -148,9 +84,14 @@ const App = () => {
       const result = await contract.value();
       setResult(result.toString());
       console.log("Value retrieved successfully:", result.toString());
+
+      // Toast For Get Rsult Success
       ResultTrueGet();
+
     } catch (error) {
       console.error("Error getting value:", error);
+
+      // Toast For Get Rsult Failed
       ResultFalseGet();
     }
   };
@@ -191,6 +132,8 @@ const App = () => {
       </div>
 
       <Background
+        //props from Background
+        
         GetInfo={getAccountInfo}
         AddressValue={addresAcc}
         BalanceValue={balanceaccount}
