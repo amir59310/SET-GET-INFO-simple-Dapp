@@ -1,0 +1,41 @@
+/* 
+   Animation keyframes for fading down connection state.
+   
+*/
+@keyframes fade-down-connection-state {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.animate-fade-down-connection-state {
+  animation: fade-down-connection-state 1s ease-in-out;
+  animation-delay: 1s; /* تاخیر 3 ثانیه قبل از شروع انیمیشن */
+  animation-fill-mode: forwards; /* برای نگه‌داشتن حالت نهایی انیمیشن بعد از اجرا */
+  opacity: 0;
+}
+
+/* 
+   This keyframe animation fades an element down 
+*/
+
+@keyframes fade-down-for-background {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+/* 
+   This class applies the fade-down-for-background animation 
+   
+*/
+.animate-fade-down-for-background {
+  animation: fade-down-for-background 1s ease-in-out;
+}

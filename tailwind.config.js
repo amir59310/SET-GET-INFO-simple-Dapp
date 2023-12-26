@@ -73,7 +73,7 @@ module.exports = {
     blur: {
       0: '0',
       none: '0',
-      sm: '4px',
+      sm: '2px',
       DEFAULT: '8px',
       md: '12px',
       lg: '16px',

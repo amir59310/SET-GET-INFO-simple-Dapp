@@ -4,8 +4,10 @@ import ABI from "./abiFile/ABI.json";
 import Background from "./Components/Background";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import ConnectionState from "./Components/ConnectionState";
 // import toast from module file toastNotification
 import { ClickSet, WalletNotConnected, ResultFalseGet, ResultFalseSet, ResultTrueGet, PleaseSetNumber, UpdateTrueGetInfo, UpdateFalseGetInfo, ResultTrueSet } from "./module/toastNotification"
+
 
 
 
@@ -15,6 +17,7 @@ const App = () => {
   const [result, setResult] = useState("");
   const [balanceaccount, setbalanceaccount] = useState("Balance");
   const [addresAcc, setddresAcc] = useState("Address");
+  const [WalletState , setWalletState] = useState("DISCONNECTED");
 
   // Initialize contract and connect to Metamask
 
@@ -25,6 +28,12 @@ const App = () => {
         // Connect to Metamask
         const provider = new ethers.providers.Web3Provider(window.ethereum);
         const accounts = await window.ethereum.request({ method: "eth_requestAccounts" });
+        if (accounts.length > 0 ) {
+          setWalletState("CONNECTED");
+        }
+        else {
+          setWalletState('DISCONNECTED')
+        }
 
         const signer = provider.getSigner();
 
@@ -144,6 +153,8 @@ const App = () => {
       <div>
         <ToastContainer />
       </div>
+
+      <ConnectionState  showWalletState={WalletState} />
 
       <Background
         //props from Background
