@@ -18,10 +18,10 @@ const ConnectionState = ({ showWalletState }) => {
     }, [showWalletState]);
 
     return (
-        <div className="bg-[#252525] bg-cover flex items-center justify-center  ">
+        <div className="bg-[#252525] bg-cover flex items-center justify-center ">
             <div className="absolute drop-shadow-xl animate-fade-down-connection-state ">
 
-                <span className="bg-[#3f3f3f]  text-[#b9b9b9]  px-2 pb-2 pt-9 rounded-b-xl  font flex items-center z-10"><svg width="15" height="15" className="mt-2 mr-1 blur-sm animate-pulse ">
+                <span className="bg-[#3f3f3f]  text-[#b9b9b9]  px-2 pb-1 pt-9 rounded-b-xl flex items-center "><svg width="15" height="15" className="mt-1 mr-1 blur-sm animate-pulse ">
                     <circle cx="5" cy="5" r="5" fill={Svgcolor}> </circle>
                 </svg>{showWalletState}</span>
                 {/* #c50909 */}
